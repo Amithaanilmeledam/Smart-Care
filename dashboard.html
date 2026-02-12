@@ -111,6 +111,14 @@
           opacity: 0.7;
         }
       }
+      
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+.animate-fadeIn {
+  animation: fadeIn 0.25s ease;
+}
     </style>
   </head>
   <body
@@ -145,17 +153,44 @@
               type="text"
             />
           </div>
-          <div class="flex items-center gap-4">
-            <button
-              class="px-5 py-2 text-sm font-bold text-slate-700 hover:text-primary transition-colors"
-            >
-              Sign In
-            </button>
-            <button
-              class="px-6 py-2 bg-primary text-white rounded-full text-sm font-bold shadow-md hover:shadow-lg hover:bg-emerald-500 transition-all"
-            >
-              Sign Up
-            </button>
+          <div id="authButtons" class="flex items-center gap-4">
+  <button id="signInBtn"
+    class="px-5 py-2 text-sm font-bold text-slate-700 hover:text-primary transition-colors">
+    Sign In
+  </button>
+  <button id="signUpBtn"
+    class="px-6 py-2 bg-primary text-white rounded-full text-sm font-bold shadow-md hover:shadow-lg hover:bg-emerald-500 transition-all">
+    Sign Up
+  </button>
+</div>
+
+<div class="relative hidden" id="accountWrapper">
+    <button id="accountBtn">
+    
+    <img id="profileImage"
+      class="w-8 h-8 rounded-full object-cover"
+      src="https://i.pravatar.cc/40" />
+    <span class="material-icons text-slate-600">Account</span>
+  </button>
+
+  <div id="accountDropdown"
+         class="hidden absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg overflow-hidden z-50">
+
+        <div id="profileOption" class="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+            Profile
+        </div>
+
+        <div id="activitiesOption" class="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+            Activities
+        </div>
+
+        <div id="logoutOption" class="px-4 py-2 hover:bg-gray-100 cursor-pointer text-red-500">
+            Logout
+        </div>
+    </div>
+</div>
+
+
             <!--div class="h-8 w-[1px] bg-slate-200 mx-1"></div>
             <button
               class="flex items-center gap-2 bg-white/80 hover:bg-white p-1 pr-4 rounded-full shadow-sm transition-all border border-slate-100"
@@ -200,7 +235,8 @@
           </div>
           <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
             <div
-              class="glass-panel rounded-xl p-6 card-hover transition-all cursor-pointer group"
+              class="glass-panel rounded-xl p-6 card-hover transition-all cursor-pointer group" data-protected="true"
+     data-redirect="buy-sell-home.html"
             >
               <div
                 class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"
@@ -213,12 +249,13 @@
               </p>
             </div>
             <div
-              class="glass-panel rounded-xl p-6 card-hover transition-all cursor-pointer group"
+              class="glass-panel rounded-xl p-6 card-hover transition-all cursor-pointer group" data-protected="true"
+     data-redirect="Records-home.html"
             >
               <div
                 class="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"
               >
-                <span class="material-icons text-amber-600">assignment</span>
+                <span class="material-icons text-amber-600">Keep Records</span>
               </div>
               <h3 class="font-bold text-slate-800">Digital Records</h3>
               <p class="text-sm text-slate-500 mt-2">
@@ -226,7 +263,8 @@
               </p>
             </div>
             <div
-              class="glass-panel rounded-xl p-6 card-hover transition-all cursor-pointer group"
+              class="glass-panel rounded-xl p-6 card-hover transition-all cursor-pointer group" data-protected="true"
+     data-redirect="shelters-home.html"
             >
               <div
                 class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"
@@ -239,7 +277,8 @@
               </p>
             </div>
             <div
-              class="glass-panel rounded-xl p-6 card-hover transition-all cursor-pointer group"
+              class="glass-panel rounded-xl p-6 card-hover transition-all cursor-pointer group" data-protected="true"
+     data-redirect="Trainer-home.html"
             >
               <div
                 class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"
@@ -262,7 +301,8 @@
           </div>
           <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div
-              class="glass-panel rounded-xl p-6 flex items-start gap-4 card-hover transition-all cursor-pointer"
+              class="glass-panel rounded-xl p-6 flex items-start gap-4 card-hover transition-all cursor-pointer" data-protected="true"
+     data-redirect="Medical-home.html"
             >
               <div class="bg-rose-100 p-3 rounded-lg">
                 <span class="material-icons text-rose-600"
@@ -277,10 +317,11 @@
               </div>
             </div>
             <div
-              class="glass-panel rounded-xl p-6 flex items-start gap-4 card-hover transition-all cursor-pointer"
+              class="glass-panel rounded-xl p-6 flex items-start gap-4 card-hover transition-all cursor-pointer" data-protected="true"
+     data-redirect="Nutrition-home.html"
             >
               <div class="bg-orange-100 p-3 rounded-lg">
-                <span class="material-icons text-orange-600">restaurant</span>
+                <span class="material-icons text-orange-600">Nutrition Planner</span>
               </div>
               <div>
                 <h4 class="font-bold text-slate-800">Nutrition</h4>
@@ -386,7 +427,8 @@
           </div>
           <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div
-              class="glass-panel rounded-xl p-6 flex items-start gap-4 card-hover transition-all cursor-pointer"
+              class="glass-panel rounded-xl p-6 flex items-start gap-4 card-hover transition-all cursor-pointer" data-protected="true"
+     data-redirect="Livestock-care-home.html"
             >
               <div class="bg-stone-100 p-3 rounded-lg">
                 <span class="material-icons text-stone-600">agriculture</span>
@@ -402,7 +444,7 @@
               class="glass-panel rounded-xl p-6 flex items-start gap-4 card-hover transition-all cursor-pointer"
             >
               <div class="bg-lime-100 p-3 rounded-lg">
-                <span class="material-icons text-lime-700">menu_book</span>
+                <span class="material-icons text-lime-700">Guide</span>
               </div>
               <div>
                 <h4 class="font-bold text-slate-800">Rearing Guide</h4>
@@ -446,7 +488,8 @@
           </div>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div
-              class="relative overflow-hidden rounded-2xl h-96 group cursor-pointer shadow-xl ring-1 ring-black/5 hover:ring-primary/40 transition-all"
+              class="relative overflow-hidden rounded-2xl h-96 group cursor-pointer shadow-xl ring-1 ring-black/5 hover:ring-primary/40 transition-all" data-protected="true"
+     data-redirect="Community-home.html"
             >
               <img
                 class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
@@ -476,7 +519,8 @@
               </div>
             </div>
             <div
-              class="relative overflow-hidden rounded-2xl h-96 group cursor-pointer shadow-xl ring-1 ring-black/5 hover:ring-primary/40 transition-all"
+              class="relative overflow-hidden rounded-2xl h-96 group cursor-pointer shadow-xl ring-1 ring-black/5 hover:ring-primary/40 transition-all" data-protected="true"
+     data-redirect="Blog-home.html"
             >
               <img
                 class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
@@ -503,7 +547,8 @@
               </div>
             </div>
             <div
-              class="relative overflow-hidden rounded-2xl h-96 group cursor-pointer shadow-xl ring-1 ring-black/5 hover:ring-primary/40 transition-all"
+              class="relative overflow-hidden rounded-2xl h-96 group cursor-pointer shadow-xl ring-1 ring-black/5 hover:ring-primary/40 transition-all" data-protected="true"
+     data-redirect="Memory-home.html"
             >
               <img
                 class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
@@ -641,5 +686,240 @@
         </span>
       </button-->
     </div>
+  
+<!-- ================= LOGIN MODAL ================= -->
+<div id="loginModal"
+  class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden items-center justify-center z-50">
+
+  <div class="bg-white w-96 rounded-2xl shadow-2xl p-8 relative animate-fadeIn">
+
+    <button id="closeModal"
+      class="absolute top-3 right-3 text-slate-400 hover:text-red-500 transition">
+      ✕
+    </button>
+
+    <h2 class="text-2xl font-bold mb-6 text-slate-800 text-center">
+      Sign In
+    </h2>
+
+   <input type="text" id="signinUsername" placeholder="Username">
+<input type="password" id="signinPassword" placeholder="Password">
+
+    <button id="modalLoginBtn"
+      class="w-full py-3 bg-emerald-500 text-white rounded-lg font-bold hover:bg-emerald-600 transition">
+      Login
+    </button>
+
+  </div>
+</div>
+<div id="signupModal"
+     class="hidden fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+
+  <div class="bg-white p-6 rounded-lg w-96">
+
+    <h2 class="text-xl font-bold mb-4">Sign Up</h2>
+
+    <input type="text" id="signupName" placeholder="Name" class="w-full mb-2 p-2 border rounded">
+    <input type="email" id="signupEmail" placeholder="Email" class="w-full mb-2 p-2 border rounded">
+    <input type="password" id="signupPassword" placeholder="Create Password" class="w-full mb-2 p-2 border rounded">
+    <input type="text" id="signupPhone" placeholder="Phone (Optional)" class="w-full mb-2 p-2 border rounded">
+    <input type="file" id="signupPhoto" class="w-full mb-3">
+
+    <button id="signupBtn"
+            class="w-full bg-indigo-600 text-white py-2 rounded hover:bg-indigo-700">
+        Sign Up
+    </button>
+
+    <p class="text-sm mt-3">
+        Already have an account?
+        <span id="goToSignin" class="text-indigo-600 cursor-pointer">Sign In</span>
+    </p>
+
+  </div>
+</div>
+
+<div id="profileSection" class="hidden p-6">
+    <h2 class="text-2xl font-bold mb-4">My Profile</h2>
+
+    <img id="profilePhoto"
+         class="w-32 h-32 rounded-full mb-4 object-cover">
+
+    <p><strong>Name:</strong> <span id="profileName"></span></p>
+    <p><strong>Email:</strong> <span id="profileEmail"></span></p>
+    <p><strong>Phone:</strong> <span id="profilePhone"></span></p>
+</div>
+
+ <
+<script>
+
+/* ================= ELEMENTS ================= */
+
+const loginModal = document.getElementById("loginModal");
+const signupModal = document.getElementById("signupModal");
+
+const signInBtn = document.getElementById("signInBtn");
+const signUpBtn = document.getElementById("signUpBtn");
+
+const closeModal = document.getElementById("closeModal");
+const modalLoginBtn = document.getElementById("modalLoginBtn");
+
+const authButtons = document.getElementById("authButtons");
+const accountWrapper = document.getElementById("accountWrapper");
+const accountBtn = document.getElementById("accountBtn");
+const accountDropdown = document.getElementById("accountDropdown");
+
+const profileOption = document.getElementById("profileOption");
+const activitiesOption = document.getElementById("activitiesOption");
+const logoutOption = document.getElementById("logoutOption");
+
+const profileSection = document.getElementById("profileSection");
+
+const signupBtn = document.getElementById("signupBtn");
+const goToSignin = document.getElementById("goToSignin");
+
+/* ================= AUTH CHECK ================= */
+
+function checkAuth() {
+  const user = JSON.parse(localStorage.getItem("smartcare_user"));
+
+  if (user) {
+    authButtons.classList.add("hidden");
+    accountWrapper.classList.remove("hidden");
+  } else {
+    authButtons.classList.remove("hidden");
+    accountWrapper.classList.add("hidden");
+  }
+}
+
+checkAuth();
+
+/* ================= OPEN MODALS ================= */
+
+function openLogin() {
+  loginModal.classList.remove("hidden");
+  loginModal.classList.add("flex");
+}
+
+function closeLogin() {
+  loginModal.classList.add("hidden");
+  loginModal.classList.remove("flex");
+}
+
+function openSignup() {
+  signupModal.classList.remove("hidden");
+  signupModal.classList.add("flex");
+}
+
+function closeSignup() {
+  signupModal.classList.add("hidden");
+  signupModal.classList.remove("flex");
+}
+
+signInBtn?.addEventListener("click", openLogin);
+signUpBtn?.addEventListener("click", openSignup);
+closeModal?.addEventListener("click", closeLogin);
+
+goToSignin?.addEventListener("click", () => {
+  closeSignup();
+  openLogin();
+});
+
+/* ================= SIGN UP ================= */
+
+signupBtn?.addEventListener("click", () => {
+
+  const name = document.getElementById("signupName").value.trim();
+  const email = document.getElementById("signupEmail").value.trim();
+  const password = document.getElementById("signupPassword").value.trim();
+  const phone = document.getElementById("signupPhone").value.trim();
+
+  if (!name || !email || !password) {
+    alert("Please fill required fields");
+    return;
+  }
+
+  const user = {
+    name,
+    email,
+    password,
+    phone
+  };
+
+  localStorage.setItem("smartcare_user", JSON.stringify(user));
+
+  alert("Account created successfully!");
+  closeSignup();
+  checkAuth();
+});
+
+/* ================= SIGN IN ================= */
+
+modalLoginBtn?.addEventListener("click", () => {
+
+  const username = document.getElementById("signinUsername").value.trim();
+  const password = document.getElementById("signinPassword").value.trim();
+
+  const storedUser = JSON.parse(localStorage.getItem("smartcare_user"));
+
+  if (!storedUser || storedUser.email !== username || storedUser.password !== password) {
+    alert("Invalid credentials");
+    return;
+  }
+
+  closeLogin();
+  checkAuth();
+});
+
+/* ================= LOGOUT ================= */
+
+logoutOption?.addEventListener("click", () => {
+  localStorage.removeItem("smartcare_user");
+  alert("Logged out successfully");
+  location.reload();
+});
+
+/* ================= DROPDOWN ================= */
+
+accountBtn?.addEventListener("click", () => {
+  accountDropdown.classList.toggle("hidden");
+});
+
+/* ================= PROFILE SECTION ================= */
+
+profileOption?.addEventListener("click", () => {
+  const user = JSON.parse(localStorage.getItem("smartcare_user"));
+
+  if (!user) return;
+
+  document.getElementById("profileName").textContent = user.name;
+  document.getElementById("profileEmail").textContent = user.email;
+  document.getElementById("profilePhone").textContent = user.phone || "Not provided";
+
+  profileSection.classList.toggle("hidden");
+});
+
+/* ================= PROTECTED CARDS ================= */
+
+const cards = document.querySelectorAll("[data-redirect]");
+
+cards.forEach(card => {
+  card.addEventListener("click", () => {
+
+    const isProtected = card.dataset.protected === "true";
+    const redirectPage = card.dataset.redirect;
+    const user = localStorage.getItem("smartcare_user");
+
+    if (isProtected && !user) {
+      openLogin();
+    } else {
+      window.location.href = redirectPage;
+    }
+
+  });
+});
+
+</script>
+
+
   </body>
 </html>
